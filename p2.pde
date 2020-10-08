@@ -57,10 +57,10 @@ public void setup()
                  .setWidth(w)
                  .setCollapseMode(Accordion.MULTI)
                  .addItem(crearG1v2("g1",0,0,w,h,data))
-                 .addItem(crearG2v2("g2",0,0,w,h,data))
+                 .addItem(crearG2v2("g2",0,0,w,h,new float[]{1,2,3,4,5}))
                  .addItem(crearG3v2("g3",0,0,w,h,data,data2))
-                 .addItem(crearG2v2("g4",0,0,w,h,data))
-                 .addItem(crearG2v2("g5",0,0,w,h,data))
+                 //.addItem(crearG2v2("g4",0,0,w,h,data))
+                 //.addItem(crearG2v2("g5",0,0,w,h,data))
                  ;
 }
 
@@ -72,20 +72,36 @@ public void Enviar() {
   String dd = cp5.get(Textfield.class,"dd").getText();
   
   
-String start = yyyy + "-" + MM + "-" + dd + "%2000:00:00";
-String end = yyyy + "-" + MM + "-" + dd + "%2011:59:59";
+String start = yyyy + "-" + MM + "-" + dd;
+
   
-  String url1= "https://api.thingspeak.com/channels/1117472/feeds.json?start="+ start+ "&end="+end;
+  String url1= "https://api.taskycodes.com/verpesospordia?fecha=" + start;
   GetRequest get = new GetRequest(url1);
   get.send(); // program will wait untill the request is completed
   
+  JSONArray body1 = parseJSONArray(get.getContent());
   
- //println(url1);
-  JSONObject body = parseJSONObject(get.getContent());
-  JSONArray feeds = body.getJSONArray("feeds");
+  actualizarG1(body1);
   
-  println("total:" + feeds.size());//
+  String url2= "https://api.taskycodes.com/verpaquetespormes?fecha=" + start;
+  GetRequest get2 = new GetRequest(url2);
+  get2.send(); // program will wait untill the request is completed
   
+  JSONArray body2 = parseJSONArray(get2.getContent());
+  
+  actualizarG2(body2);
+  
+  String url3= "https://api.taskycodes.com/verobstaculosidayvuelta?fecha=" + start;
+  GetRequest get3 = new GetRequest(url3);
+  get3.send(); // program will wait untill the request is completed
+  
+  JSONObject body3 = parseJSONObject(get3.getContent());
+  
+  actualizarG3(body3);
+  
+  
+  
+
 }
 
 void draw(){
