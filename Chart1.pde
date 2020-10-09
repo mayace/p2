@@ -1,6 +1,20 @@
+void actualizarG1v2(JSONArray body){
+  
+  float[] data = new float[24];
+
+  for (int i = 0; i < body.size(); i++) {
+    JSONObject item = body.getJSONObject(i);
+    int hora = Integer.parseInt(item.getString("hora").split(":")[0]);
+    data[hora] =item.getFloat("peso");
+  }
+  
+  chart1.setData("data", data);
+}
+
 void actualizarG1(JSONArray body){
   
   float[] data = new float[body.size()];
+
   
   for (int i = 0; i < body.size(); i++) {
     JSONObject item = body.getJSONObject(i);
@@ -9,8 +23,6 @@ void actualizarG1(JSONArray body){
   
   chart1.setData("data", data);
 }
-
-
 Group crearG1v2(String id,int x, int y, int w,int h,float[] data){
  
   Group g1 = cp5.addGroup(id)

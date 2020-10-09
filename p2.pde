@@ -7,7 +7,7 @@ ControlP5 cp5;
 Chart myChart,chart1,chart2,chart3,chart4,chart5;
 public void setup() 
 {
-  size(800,600);
+  size(1200,800);
    cp5= new ControlP5(this);
    
   PFont font = createFont("arial",20);
@@ -45,7 +45,7 @@ public void setup()
      
      float[] data= {10,4,3,5,78,3};
      float[] data2= {5,55,8,45,6,0};
-     int w = 700;
+     int w = 1024;
      int h = 200;
      int x0 = 20;
      int y0 = 120;
@@ -59,8 +59,8 @@ public void setup()
                  .addItem(crearG1v2("g1",0,0,w,h,data))
                  .addItem(crearG2v2("g2",0,0,w,h,new float[]{1,2,3,4,5}))
                  .addItem(crearG3v2("g3",0,0,w,h,data,data2))
-                 //.addItem(crearG2v2("g4",0,0,w,h,data))
-                 //.addItem(crearG2v2("g5",0,0,w,h,data))
+                 .addItem(crearG4v2("g4",0,0,w,h,data,data2))
+                 .addItem(crearG5v2("g5",0,0,w,h,data,data2))
                  ;
 }
 
@@ -89,7 +89,7 @@ String start = yyyy + "-" + MM + "-" + dd;
   
   JSONArray body2 = parseJSONArray(get2.getContent());
   
-  actualizarG2(body2);
+  actualizarG2v2(body2);
   
   String url3= "https://api.taskycodes.com/verobstaculosidayvuelta?fecha=" + start;
   GetRequest get3 = new GetRequest(url3);
@@ -97,11 +97,26 @@ String start = yyyy + "-" + MM + "-" + dd;
   
   JSONObject body3 = parseJSONObject(get3.getContent());
   
-  actualizarG3(body3);
+  actualizarG3v2(body3);
   
+  String url4= "https://api.taskycodes.com/vertiemposdeidayvuelta?fecha=" + start;
+  GetRequest get4 = new GetRequest(url4);
+  get4.send(); // program will wait untill the request is completed
   
+  JSONObject body4 = parseJSONObject(get4.getContent());
   
-
+  actualizarG4(body4);
+  
+  String url5= "https://api.taskycodes.com/vertiempospromediospordia?fecha=" + start;
+  GetRequest get5 = new GetRequest(url5);
+  get5.send(); // program will wait untill the request is completed
+  
+  JSONArray body5 = parseJSONArray(get5.getContent());
+  
+  actualizarG5(body5);
+ 
+ 
+ 
 }
 
 void draw(){

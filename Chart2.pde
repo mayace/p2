@@ -1,3 +1,25 @@
+void actualizarG2v2(JSONArray body){
+  
+  float[] data = new float[31];
+
+  float max = 0;
+  for (int i = 0; i < body.size(); i++) {
+    JSONObject item = body.getJSONObject(i);
+    int dia = Integer.parseInt(item.getString("fecha").split("-")[2]);
+   
+    int indexDia = dia - 1;
+    data[indexDia] += item.getFloat("paquetesentregados");
+    
+    if(max < data[indexDia]){
+      max = data[indexDia];
+    }
+  }
+  
+  chart2.setRange(0,max + max * 0.25);
+  chart2.setData("data", data);
+}
+
+
 void actualizarG2(JSONArray body){
   
   float[] data = new float[body.size()];
