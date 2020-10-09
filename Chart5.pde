@@ -1,3 +1,27 @@
+void actualizarG5v2(JSONArray body){
+  
+  float[] data = new float[body.size()];
+  float[] data2 = new float[body.size()];
+  
+  float max = 0;
+  for (int i = 0; i < body.size(); i++) {
+    JSONObject item = body.getJSONObject(i); 
+    data[i] =(float)item.getInt("promedioida");
+    data2[i] =(float)item.getInt("promediovuelta");
+    
+    if(max < data[i]){
+      max = data[i];
+    }
+    if(max < data2[i]){
+      max = data2[i];
+    }
+  }
+  
+  chart5.setRange(0,max + max*0.25);
+  chart5.setData("ida",data);
+  chart5.setData("vuelta",data2);
+}
+
 void actualizarG5(JSONArray body){
   
   float[] data = new float[body.size()];

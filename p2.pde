@@ -105,7 +105,7 @@ String start = yyyy + "-" + MM + "-" + dd;
   
   JSONObject body4 = parseJSONObject(get4.getContent());
   
-  actualizarG4(body4);
+  actualizarG4v2(body4);
   
   String url5= "https://api.taskycodes.com/vertiempospromediospordia?fecha=" + start;
   GetRequest get5 = new GetRequest(url5);
@@ -114,8 +114,6 @@ String start = yyyy + "-" + MM + "-" + dd;
   JSONArray body5 = parseJSONArray(get5.getContent());
   
   actualizarG5(body5);
- 
- 
  
 }
 

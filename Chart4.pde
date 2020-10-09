@@ -1,3 +1,40 @@
+void actualizarG4v2(JSONObject body){
+  
+  JSONArray ida = body.getJSONArray("ida");
+  JSONArray vuelta = body.getJSONArray("vuelta");
+  
+  float[] data = new float[24];
+  float[] data2 = new float[24];
+  
+  float max = 0;
+  for (int i = 0; i < ida.size(); i++) {
+    JSONObject item = ida.getJSONObject(i);
+    int hora = Integer.parseInt(item.getString("hora").split(":")[0]);
+    float val = (float)item.getInt("tida");
+    data[hora] += val;
+    
+    if(max < data[hora]){
+      max = data[hora];
+    }
+  }
+  
+   for (int i = 0; i < vuelta.size(); i++) {
+    JSONObject item = vuelta.getJSONObject(i); 
+    int hora = Integer.parseInt(item.getString("hora").split(":")[0]);
+    float val = (float)item.getInt("tregreso");
+    
+    data2[hora] +=val;
+    
+    if(max < data2[hora]){
+      max = data2[hora];
+    }
+  }
+  
+  chart4.setRange(0,max);
+  chart4.setData("ida",data);
+  chart4.setData("vuelta",data2);
+}
+
 void actualizarG4(JSONObject body){
   
   JSONArray ida = body.getJSONArray("ida");
