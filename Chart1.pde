@@ -2,12 +2,19 @@ void actualizarG1v2(JSONArray body){
   
   float[] data = new float[24];
 
+  float max = 0;
   for (int i = 0; i < body.size(); i++) {
     JSONObject item = body.getJSONObject(i);
     int hora = Integer.parseInt(item.getString("hora").split(":")[0]);
-    data[hora] =item.getFloat("peso");
+    float val = item.getFloat("peso");
+    data[hora] =val;
+    
+    if(max < data[hora]){
+      data[hora] = data[hora];
+    }
   }
   
+  chart1.setRange(0, max + max * 0.1);
   chart1.setData("data", data);
 }
 
@@ -33,15 +40,42 @@ Group crearG1v2(String id,int x, int y, int w,int h,float[] data){
                 ;
                 
   int padding = 20;
+  int vw = w - 2 * padding;
+  int vh = h - 2 * padding;
+  float rangeMin = 0;
+  float rangeMax = 600;
+  float rangeAbs = rangeMax - rangeMin;
+  
    Chart c = cp5.addChart(id + ".chart1")
      .setPosition(padding, padding)
-     .setSize(w - 2*padding, h -2*padding)
-     .setRange(0, 600)
+     .setSize(vw, vh)
+     .setRange(rangeMin, rangeMax)
      .setView(Chart.LINE) // use Chart.LINE, Chart.PIE, Chart.AREA, Chart.BAR_CENTERED
      .setGroup(g1)
      ;
      
-     
+     int horas = 24;
+     float spaceX = vw / (horas - 1);
+     for(int i = 0; i < horas; i++){
+       cp5.addTextlabel("labelx" + i)
+         .setPosition(padding + i * spaceX ,  padding + vh)
+         .setText(String.valueOf(i))
+         .setGroup(g1)
+        ;
+      }
+  
+    int pesos = 8;
+   
+    float spaceY = vh / (pesos - 1);
+     for(int i = 0; i < pesos; i++){
+       float val = rangeAbs * ((pesos - 1) - i) / (pesos - 1);
+       cp5.addTextlabel("labely" + i)
+         .setPosition(0,  padding + spaceY * i)
+         .setText(String.valueOf((int)val))
+         .setGroup(g1)
+        ;
+      }
+
   c.addDataSet("data");
   c.setData("data", data);
   

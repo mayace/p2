@@ -25,7 +25,7 @@ public void setup()
      .setPosition(220,20)
      .setSize(200,40)
      .setFont(font)
-     .setText("09")
+     .setText("08")
      ;
      cp5.addTextfield("dd")
      .setPosition(420,20)
@@ -45,7 +45,7 @@ public void setup()
      
      float[] data= {10,4,3,5,78,3};
      float[] data2= {5,55,8,45,6,0};
-     int w = 1024;
+     int w = 1124;
      int h = 200;
      int x0 = 20;
      int y0 = 120;
@@ -113,7 +113,7 @@ String start = yyyy + "-" + MM + "-" + dd;
   
   JSONArray body5 = parseJSONArray(get5.getContent());
   
-  actualizarG5(body5);
+  actualizarG5v2(body5);
  
 }
 

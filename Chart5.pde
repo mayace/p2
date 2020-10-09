@@ -17,7 +17,7 @@ void actualizarG5v2(JSONArray body){
     }
   }
   
-  chart5.setRange(0,max + max*0.25);
+  chart5.setRange(0,max + max*0.1);
   chart5.setData("ida",data);
   chart5.setData("vuelta",data2);
 }
