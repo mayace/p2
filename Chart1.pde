@@ -14,6 +14,16 @@ void actualizarG1v2(JSONArray body){
     }
   }
   
+  Group g1 = cp5.get(Group.class,"g1");
+  int vw = chart1.getWidth();
+  int vh = chart1.getHeight();
+  
+  //not accurate
+  //int padding = (g1.getHeight() - vh) / 2;
+  //println(g1.getSize());
+  
+  yLabelsUpdate(g1,8,vw,vh,20,(int)max);
+  
   chart1.setRange(0, max);
   chart1.setData("data", data);
 }

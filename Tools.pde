@@ -36,14 +36,13 @@ void yLabelsToGroup(Group g, int pasos, int vw, int vh, int padding, int rangeAb
 }
 
 
-void actualizarLabelsY(int medidas,int rangeAbs,int padding, int vh){
-      float spaceY = vh / (medidas - 1);
-     for(int i = 0; i < medidas; i++){
-       float val = rangeAbs * ((medidas - 1) - i) / (medidas - 1);
-       cp5.addTextlabel("labely" + i)
+void yLabelsUpdate(Group g, int pasos, int vw, int vh, int padding, int rangeAbs){
+    float spaceY = vh / (pasos - 1);
+     for(int i = 0; i < pasos; i++){
+       float val = rangeAbs * ((pasos - 1) - i) / (pasos - 1);
+       cp5.get(Textlabel.class, g.getName() + "_y_" + i)
          .setPosition(0,  padding + spaceY * i)
          .setText(String.valueOf((int)val))
-         //.setGroup(g1)
         ;
       }
 }

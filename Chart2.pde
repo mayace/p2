@@ -15,7 +15,14 @@ void actualizarG2v2(JSONArray body){
     }
   }
   
-  chart2.setRange(0,max + max * 0.25);
+  Group g2 = cp5.get(Group.class,"g2");
+  int vw = chart1.getWidth();
+  int vh = chart1.getHeight();
+  
+  yLabelsUpdate(g2,8,vw,vh,20,(int)max);
+  
+  
+  chart2.setRange(0,max);
   chart2.setData("data", data);
 }
 
