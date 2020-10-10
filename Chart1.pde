@@ -54,27 +54,28 @@ Group crearG1v2(String id,int x, int y, int w,int h,float[] data){
      .setGroup(g1)
      ;
      
-     int horas = 24;
-     float spaceX = vw / (horas - 1);
-     for(int i = 0; i < horas; i++){
-       cp5.addTextlabel("labelx" + i)
-         .setPosition(padding + i * spaceX ,  padding + vh)
-         .setText(String.valueOf(i))
-         .setGroup(g1)
-        ;
-      }
-  
-    int pesos = 8;
+     //int horas = 24;
+     //float spaceX = vw / (horas - 1);
+     //for(int i = 0; i < horas; i++){
+     //  cp5.addTextlabel("labelx" + i)
+     //    .setPosition(padding + i * spaceX ,  padding + vh)
+     //    .setText(String.valueOf(i))
+     //    .setGroup(g1)
+     //   ;
+     // }
+     xLabelsToGroup(g1,24,vw,vh,padding);
+     yLabelsToGroup(g1,8,vw,vh,padding,rangeAbs);
+    //int pesos = 8;
    
-    float spaceY = vh / (pesos - 1);
-     for(int i = 0; i < pesos; i++){
-       float val = rangeAbs * ((pesos - 1) - i) / (pesos - 1);
-       cp5.addTextlabel("labely" + i)
-         .setPosition(0,  padding + spaceY * i)
-         .setText(String.valueOf((int)val))
-         .setGroup(g1)
-        ;
-      }
+    //float spaceY = vh / (pesos - 1);
+    // for(int i = 0; i < pesos; i++){
+    //   float val = rangeAbs * ((pesos - 1) - i) / (pesos - 1);
+    //   cp5.addTextlabel("labely" + i)
+    //     .setPosition(0,  padding + spaceY * i)
+    //     .setText(String.valueOf((int)val))
+    //     .setGroup(g1)
+    //    ;
+    //  }
 
   c.addDataSet("data");
   c.setData("data", data);
