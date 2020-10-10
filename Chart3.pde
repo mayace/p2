@@ -30,7 +30,13 @@ void actualizarG3v2(JSONObject body){
     }
   }
   
-  chart3.setRange(0,max + max * 0.25);
+  Group g3 = cp5.get(Group.class,"g3");
+  int vw = chart3.getWidth();
+  int vh = chart3.getHeight();
+  
+  yLabelsUpdate(g3,8,vw,vh,20,(int)max);
+  
+  chart3.setRange(0,max);
   chart3.setData("ida",data);
   chart3.setData("vuelta",data2);
 }
@@ -68,17 +74,24 @@ Group crearG3v2(String id, int x, int y, int w,int h,float[] data,float[] data2)
                 .setBackgroundColor(color(255,100))
                 ;
                 
-int padding = 20;
+  int padding = 20;
+  int vw = w - 2 * padding;
+  int vh = h - 2 * padding;
+  float rangeMin = 0;
+  float rangeMax = 10;
+  float rangeAbs = rangeMax - rangeMin;
 
    Chart c = cp5.addChart(id + ".chart2")
      .setPosition(padding, padding)
-     .setSize(w - 2* padding, h - 2*padding)
-     .setRange(0, 10)
+     .setSize(vw, vh)
+     .setRange(rangeMin, rangeMax)
      .setView(Chart.BAR_CENTERED) 
      .setGroup(g1)
      ;
      
-     
+  xLabelsToGroup(g1,24,vw,vh,padding,new float[]{15,45},DAY_HOURS);
+  yLabelsToGroup(g1,8,vw,vh,padding,(int)rangeAbs);
+  
   c.addDataSet("ida");
   c.setData("ida", data);
   

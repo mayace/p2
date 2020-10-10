@@ -30,6 +30,12 @@ void actualizarG4v2(JSONObject body){
     }
   }
   
+  Group g4 = cp5.get(Group.class,"g4");
+  int vw = chart4.getWidth();
+  int vh = chart4.getHeight();
+  
+  yLabelsUpdate(g4,8,vw,vh,20,(int)max);
+  
   chart4.setRange(0,max);
   chart4.setData("ida",data);
   chart4.setData("vuelta",data2);
@@ -67,16 +73,24 @@ Group crearG4v2(String id, int x, int y, int w,int h,float[] data,float[] data2)
                 .setBackgroundColor(color(255,100))
                 ;
                 
-int padding = 20;
+  int padding = 20; // esta padding tambien hay actualizar en la actualizacion y labels
+  int vw = w - 2 * padding;
+  int vh = h - 2 * padding;
+  float rangeMin = 0;
+  float rangeMax = 10;
+  float rangeAbs = rangeMax - rangeMin;
 
    Chart c = cp5.addChart(id + ".chart2")
      .setPosition(padding, padding)
-     .setSize(w - 2* padding, h - 2*padding)
-     .setRange(0, 20)
+     .setSize(vw, vh)
+     .setRange(rangeMin, rangeMax)
      .setView(Chart.LINE) 
      .setGroup(g1)
      ;
      
+     
+  xLabelsToGroup(g1,24,vw,vh,padding,new float[]{0,0},DAY_HOURS);
+  yLabelsToGroup(g1,8,vw,vh,padding,(int)rangeAbs);
      
   c.addDataSet("ida");
   c.setData("ida", data);

@@ -95,16 +95,20 @@ String start = yyyy + "-" + MM + "-" + dd;
   GetRequest get3 = new GetRequest(url3);
   get3.send(); // program will wait untill the request is completed
   
-  JSONObject body3 = parseJSONObject(get3.getContent());
-  
+  String[] content3 = get3.getContent().split("@");
+  JSONObject body3 = new JSONObject();
+  body3.setJSONArray("ida",parseJSONArray(content3[0]));
+  body3.setJSONArray("vuelta",parseJSONArray(content3[1]));
   actualizarG3v2(body3);
   
   String url4= "https://api.taskycodes.com/vertiemposdeidayvuelta?fecha=" + start;
   GetRequest get4 = new GetRequest(url4);
   get4.send(); // program will wait untill the request is completed
   
-  JSONObject body4 = parseJSONObject(get4.getContent());
-  
+  String[] content4 = get4.getContent().split("@");
+  JSONObject body4 = new JSONObject();
+  body4.setJSONArray("ida",parseJSONArray(content4[0]));
+  body4.setJSONArray("vuelta",parseJSONArray(content4[1]));
   actualizarG4v2(body4);
   
   String url5= "https://api.taskycodes.com/vertiempospromediospordia?fecha=" + start;
@@ -112,7 +116,6 @@ String start = yyyy + "-" + MM + "-" + dd;
   get5.send(); // program will wait untill the request is completed
   
   JSONArray body5 = parseJSONArray(get5.getContent());
-  
   actualizarG5v2(body5);
  
 }

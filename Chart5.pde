@@ -17,7 +17,13 @@ void actualizarG5v2(JSONArray body){
     }
   }
   
-  chart5.setRange(0,max + max*0.1);
+  Group g5 = cp5.get(Group.class,"g5");
+  int vw = chart5.getWidth();
+  int vh = chart5.getHeight();
+  
+  yLabelsUpdate(g5,8,vw,vh,20,(int)max);
+  
+  chart5.setRange(0,max);
   chart5.setData("ida",data);
   chart5.setData("vuelta",data2);
 }
@@ -47,17 +53,24 @@ Group crearG5v2(String id, int x, int y, int w,int h,float[] data,float[] data2)
                 .setBackgroundColor(color(255,100))
                 ;
                 
-int padding = 20;
+  int padding = 20;
+  int vw = w - 2 * padding;
+  int vh = h - 2 * padding;
+  float rangeMin = 0;
+  float rangeMax = 10;
+  float rangeAbs = rangeMax - rangeMin;
 
    Chart c = cp5.addChart(id + ".chart2")
      .setPosition(padding, padding)
-     .setSize(w - 2* padding, h - 2*padding)
-     .setRange(0, 20)
+     .setSize(vw,vh)
+     .setRange(rangeMin, rangeMax)
      .setView(Chart.BAR_CENTERED) 
      .setGroup(g1)
      ;
      
-     
+  xLabelsToGroup(g1,31,vw,vh,padding,new float[]{15,65},MONTH_DAYS);
+  yLabelsToGroup(g1,8,vw,vh,padding,(int)rangeAbs);
+  
   c.addDataSet("ida");
   c.setData("ida", data);
   

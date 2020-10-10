@@ -16,11 +16,10 @@ void actualizarG2v2(JSONArray body){
   }
   
   Group g2 = cp5.get(Group.class,"g2");
-  int vw = chart1.getWidth();
-  int vh = chart1.getHeight();
+  int vw = chart2.getWidth();
+  int vh = chart2.getHeight();
   
   yLabelsUpdate(g2,8,vw,vh,20,(int)max);
-  
   
   chart2.setRange(0,max);
   chart2.setData("data", data);
