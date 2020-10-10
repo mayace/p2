@@ -41,16 +41,24 @@ Group crearG2v2(String id, int x, int y, int w,int h,float[] data){
                 .setBackgroundColor(color(255,100))
                 ;
                 
-int padding = 20;
+  int padding = 20;
+  int vw = w - 2 * padding;
+  int vh = h - 2 * padding;
+  float rangeMin = 0;
+  float rangeMax = 10;
+  float rangeAbs = rangeMax - rangeMin;
 
    Chart c = cp5.addChart(id + ".chart2")
      .setPosition(padding, padding)
-     .setSize(w - 2* padding, h - 2*padding)
-     .setRange(0, 10)
+     .setSize(vw, vh)
+     .setRange(rangeMin, rangeMax)
      .setView(Chart.BAR_CENTERED) 
      .setGroup(g1)
      ;
-     
+
+  
+  xLabelsToGroup(g1,31,vw - 2*15,vh -15,padding + 15,MONTH_DAYS,0);
+  yLabelsToGroup(g1,8,vw,vh,padding,(int)rangeAbs);
      
   c.addDataSet("data");
   c.setData("data", data);
