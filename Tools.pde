@@ -10,11 +10,13 @@ static final String[] DAY_HOURS = {
 ,"21","22","23"
 };
 
-void xLabelsToGroup(Group g, int pasos, int vw, int vh, int padding, String[] values, float mvIndex){
-     float spaceX = vw / (pasos - 1);
+void xLabelsToGroup(Group g, int pasos, int vw, int vh, int padding, float[] innerPadding, String[] values){
+     float spaceX = (vw - innerPadding[1]) / (pasos - 1);
+     
      for(int i = 0; i < pasos; i++){
+       float leftPadding = padding + innerPadding[0];//(i == 0 ? innerPadding[0] : 0);  
        cp5.addTextlabel(g.getName() + "_x_" + i)
-         .setPosition(mvIndex + padding + i * spaceX ,  padding + vh)
+         .setPosition(leftPadding + i * spaceX ,  padding + vh)
          .setText(values[i])
          .setGroup(g)
         ;

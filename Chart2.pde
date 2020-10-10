@@ -57,7 +57,7 @@ Group crearG2v2(String id, int x, int y, int w,int h,float[] data){
      ;
 
   
-  xLabelsToGroup(g1,31,vw - 2*15,vh -15,padding + 15,MONTH_DAYS,0);
+  xLabelsToGroup(g1,31,vw,vh,padding,new float[]{15,65},MONTH_DAYS);
   yLabelsToGroup(g1,8,vw,vh,padding,(int)rangeAbs);
      
   c.addDataSet("data");

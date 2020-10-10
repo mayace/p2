@@ -1,20 +1,20 @@
 void actualizarG1v2(JSONArray body){
   
   float[] data = new float[24];
-
+  
   float max = 0;
   for (int i = 0; i < body.size(); i++) {
     JSONObject item = body.getJSONObject(i);
     int hora = Integer.parseInt(item.getString("hora").split(":")[0]);
     float val = item.getFloat("peso");
-    data[hora] =val;
+    data[hora] += val;
     
     if(max < data[hora]){
-      data[hora] = data[hora];
+      max = data[hora];
     }
   }
   
-  chart1.setRange(0, max + max * 0.1);
+  chart1.setRange(0, max);
   chart1.setData("data", data);
 }
 
@@ -54,7 +54,7 @@ Group crearG1v2(String id,int x, int y, int w,int h,float[] data){
      .setGroup(g1)
      ;
      
-  xLabelsToGroup(g1,24,vw,vh,padding,DAY_HOURS,0);
+  xLabelsToGroup(g1,24,vw,vh,padding, new float[]{0,4},DAY_HOURS);
   yLabelsToGroup(g1,8,vw,vh,padding,(int)rangeAbs);
     
   c.addDataSet("data");

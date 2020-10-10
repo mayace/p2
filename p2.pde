@@ -43,7 +43,7 @@ public void setup()
      
      textFont(font);
      
-     float[] data= {10,4,3,5,78,3};
+     float[] data= {110,10,200,30,400,50,6,70,8,90,10,110,120,10,140,15,160,70,18,190,20,210,22,230};
      float[] data2= {5,55,8,45,6,0};
      int w = 1124;
      int h = 200;
@@ -81,8 +81,8 @@ String start = yyyy + "-" + MM + "-" + dd;
   
   JSONArray body1 = parseJSONArray(get.getContent());
   
-  actualizarG1(body1);
-  
+  actualizarG1v2(body1);
+
   String url2= "https://api.taskycodes.com/verpaquetespormes?fecha=" + start;
   GetRequest get2 = new GetRequest(url2);
   get2.send(); // program will wait untill the request is completed
